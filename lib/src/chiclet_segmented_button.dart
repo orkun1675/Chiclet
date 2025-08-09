@@ -1,5 +1,3 @@
-library parent_class;
-
 import 'package:chiclet/chiclet.dart';
 import 'package:chiclet/src/chiclet_segmented_button_segment.dart';
 import 'package:chiclet/src/enums/button_group_positions.dart';
@@ -70,31 +68,32 @@ class ChicletSegmentedButton<T> extends StatefulWidget {
   static final Type _chicletButtonSegmentType =
       ChicletButtonSegment(child: _text).runtimeType;
 
-  ChicletSegmentedButton(
-      {Key? key,
-      this.padding,
-      this.width,
-      this.height = 50,
-      this.minimumSize,
-      this.maximumSize,
-      this.buttonHeight = 4,
-      this.borderRadius = 16,
-      this.buttonColor,
-      this.foregroundColor,
-      this.backgroundColor,
-      this.disabledForegroundColor,
-      this.disabledBackgroundColor,
-      this.splashFactory = NoSplash.splashFactory,
-      this.buttonType = ButtonTypes.roundedRectangle,
-      required this.children})
-      : super(key: key) {
+  ChicletSegmentedButton({
+    super.key,
+    this.padding,
+    this.width,
+    this.height = 50,
+    this.minimumSize,
+    this.maximumSize,
+    this.buttonHeight = 4,
+    this.borderRadius = 16,
+    this.buttonColor,
+    this.foregroundColor,
+    this.backgroundColor,
+    this.disabledForegroundColor,
+    this.disabledBackgroundColor,
+    this.splashFactory = NoSplash.splashFactory,
+    this.buttonType = ButtonTypes.roundedRectangle,
+    required this.children,
+  }) {
     for (var child in children) {
       if (child.runtimeType == _expandedType) {
         if (child is! Expanded) {
           if ((child as Expanded).child.runtimeType !=
               _chicletButtonSegmentType) {
             throw ArgumentError(
-                "Invalid child widget type. Only ChicletButtonSegment is allowed as Expanded's child.");
+              "Invalid child widget type. Only ChicletButtonSegment is allowed as Expanded's child.",
+            );
           }
         }
         _chicletButtonsList.add(child.child);
@@ -102,7 +101,8 @@ class ChicletSegmentedButton<T> extends StatefulWidget {
         _chicletButtonsList.add(child);
       } else {
         throw ArgumentError(
-            "Invalid child widget type. Only Expanded and ChicletButtonSegment are allowed.");
+          "Invalid child widget type. Only Expanded and ChicletButtonSegment are allowed.",
+        );
       }
     }
 
@@ -148,10 +148,12 @@ class _ChicletSegmentedButtonState<T> extends State<ChicletSegmentedButton<T>> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: widget.width,
-        height: widget.height + widget.buttonHeight,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: widget.children));
+      width: widget.width,
+      height: widget.height + widget.buttonHeight,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: widget.children,
+      ),
+    );
   }
 }

@@ -76,7 +76,7 @@ class ChicletOutlinedButton extends StatelessWidget {
   final InteractiveInkFeatureFactory? splashFactory;
 
   const ChicletOutlinedButton({
-    Key? key,
+    super.key,
     this.onPressed,
     this.padding,
     this.width,
@@ -97,7 +97,7 @@ class ChicletOutlinedButton extends StatelessWidget {
     this.splashFactory = NoSplash.splashFactory,
     this.buttonType = ButtonTypes.roundedRectangle,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -110,106 +110,124 @@ class ChicletOutlinedButton extends StatelessWidget {
                 ? height / 2
                 : borderRadius
             : buttonType == ButtonTypes.circle
-                ? height
-                : borderRadius;
+            ? height
+            : borderRadius;
     Color? outlinedButtonThemeColor;
     double? outlinedButtonThemeWidth;
     if (Theme.of(context).outlinedButtonTheme.style?.side != null) {
-      outlinedButtonThemeColor = Theme.of(context)
-          .outlinedButtonTheme
-          .style
-          ?.side
-          ?.resolve(<MaterialState>{})?.color;
-      outlinedButtonThemeColor = (outlinedButtonThemeColor != Colors.black)
-          ? outlinedButtonThemeColor
-          : Colors.grey;
-      outlinedButtonThemeWidth = Theme.of(context)
-          .outlinedButtonTheme
-          .style
-          ?.side
-          ?.resolve(<MaterialState>{})?.width;
+      outlinedButtonThemeColor =
+          Theme.of(
+            context,
+          ).outlinedButtonTheme.style?.side?.resolve(<WidgetState>{})?.color;
+      outlinedButtonThemeColor =
+          (outlinedButtonThemeColor != Colors.black)
+              ? outlinedButtonThemeColor
+              : Colors.grey;
+      outlinedButtonThemeWidth =
+          Theme.of(
+            context,
+          ).outlinedButtonTheme.style?.side?.resolve(<WidgetState>{})?.width;
       outlinedButtonThemeWidth =
           (outlinedButtonThemeWidth != 1) ? outlinedButtonThemeWidth : 2;
     } else {
       outlinedButtonThemeColor = Colors.grey;
       outlinedButtonThemeWidth = 2;
     }
-    final Color defaultDisabledBorderColor =
-        Theme.of(context).colorScheme.onSurface.withOpacity(0.12);
+    final Color defaultDisabledBorderColor = Theme.of(
+      context,
+    ).colorScheme.onSurface.withValues(alpha: 0.12);
     return Container(
       width: chicletWidth,
       height: (isPressed || isDisabled) ? height : height + buttonHeight,
-      margin:
-          EdgeInsets.only(top: (isPressed || isDisabled) ? buttonHeight : 0),
+      margin: EdgeInsets.only(
+        top: (isPressed || isDisabled) ? buttonHeight : 0,
+      ),
       padding: EdgeInsets.fromLTRB(
-          0, 0, 0, (isPressed || isDisabled) ? 0 : buttonHeight),
+        0,
+        0,
+        0,
+        (isPressed || isDisabled) ? 0 : buttonHeight,
+      ),
       decoration: BoxDecoration(
-          color: isDisabled
-              ? disabledBorderColor ?? defaultDisabledBorderColor
-              : (buttonColor != null)
-                  ? buttonColor
-                  : (borderColor != Colors.grey)
-                      ? borderColor ?? Colors.grey
-                      : outlinedButtonThemeColor ?? Colors.grey,
-          borderRadius: buttonType == ButtonTypes.oval
-              ? BorderRadius.all(Radius.elliptical(chicletWidth, height))
-              : BorderRadius.circular(chicletBorderRadius)),
+        color:
+            isDisabled
+                ? disabledBorderColor ?? defaultDisabledBorderColor
+                : (buttonColor != null)
+                ? buttonColor
+                : (borderColor != Colors.grey)
+                ? borderColor ?? Colors.grey
+                : outlinedButtonThemeColor ?? Colors.grey,
+        borderRadius:
+            buttonType == ButtonTypes.oval
+                ? BorderRadius.all(Radius.elliptical(chicletWidth, height))
+                : BorderRadius.circular(chicletBorderRadius),
+      ),
       child: Padding(
-        padding: (borderWidth != 2)
-            ? EdgeInsets.all(borderWidth)
-            : EdgeInsets.all(outlinedButtonThemeWidth!),
+        padding:
+            (borderWidth != 2)
+                ? EdgeInsets.all(borderWidth)
+                : EdgeInsets.all(outlinedButtonThemeWidth!),
         child: OutlinedButton(
-            onPressed: onPressed,
-            style: OutlinedButton.styleFrom(
-              minimumSize: minimumSize,
-              maximumSize: maximumSize,
-              splashFactory: splashFactory,
-              foregroundColor: foregroundColor,
-              backgroundColor:
-                  isDisabled ? disabledBackgroundColor : backgroundColor,
-              disabledBackgroundColor: disabledBackgroundColor,
-              disabledForegroundColor: disabledForegroundColor,
-              padding: (padding != null)
-                  ? const EdgeInsets.all(0).add(padding!)
-                  : const EdgeInsets.all(0),
-              shape: RoundedRectangleBorder(
-                  borderRadius: buttonType == ButtonTypes.oval
+          onPressed: onPressed,
+          style: OutlinedButton.styleFrom(
+            minimumSize: minimumSize,
+            maximumSize: maximumSize,
+            splashFactory: splashFactory,
+            foregroundColor: foregroundColor,
+            backgroundColor:
+                isDisabled ? disabledBackgroundColor : backgroundColor,
+            disabledBackgroundColor: disabledBackgroundColor,
+            disabledForegroundColor: disabledForegroundColor,
+            padding:
+                (padding != null)
+                    ? const EdgeInsets.all(0).add(padding!)
+                    : const EdgeInsets.all(0),
+            shape: RoundedRectangleBorder(
+              borderRadius:
+                  buttonType == ButtonTypes.oval
                       ? BorderRadius.all(
-                          Radius.elliptical(chicletWidth, height))
+                        Radius.elliptical(chicletWidth, height),
+                      )
                       : BorderRadius.circular(
-                          buttonType == ButtonTypes.roundedRectangle
-                              ? isDisabled
-                                  ? (borderRadius != 0)
-                                      ? borderRadius -
-                                          (outlinedButtonThemeWidth! - 2) -
-                                          2
-                                      : 0
-                                  : borderRadius - (borderWidth - 2) - 2
-                              : chicletBorderRadius - 2)),
-            ).copyWith(
-              elevation: MaterialStateProperty.all(0),
-              overlayColor: MaterialStateProperty.all(
-                  splashFactory == NoSplash.splashFactory
-                      ? Colors.transparent
-                      : Theme.of(context).splashColor),
-              side: MaterialStateProperty.resolveWith<BorderSide>(
-                (Set<MaterialState> states) {
-                  return BorderSide(
-                    style: BorderStyle.solid,
-                    width: (borderWidth != 2)
+                        buttonType == ButtonTypes.roundedRectangle
+                            ? isDisabled
+                                ? (borderRadius != 0)
+                                    ? borderRadius -
+                                        (outlinedButtonThemeWidth! - 2) -
+                                        2
+                                    : 0
+                                : borderRadius - (borderWidth - 2) - 2
+                            : chicletBorderRadius - 2,
+                      ),
+            ),
+          ).copyWith(
+            elevation: WidgetStateProperty.all(0),
+            overlayColor: WidgetStateProperty.all(
+              splashFactory == NoSplash.splashFactory
+                  ? Colors.transparent
+                  : Theme.of(context).splashColor,
+            ),
+            side: WidgetStateProperty.resolveWith<BorderSide>((
+              Set<WidgetState> states,
+            ) {
+              return BorderSide(
+                style: BorderStyle.solid,
+                width:
+                    (borderWidth != 2)
                         ? borderWidth
                         : outlinedButtonThemeWidth ?? 2,
-                    color: isDisabled
+                color:
+                    isDisabled
                         ? disabledBorderColor ?? Colors.transparent
                         : (borderColor != Colors.grey)
-                            ? borderColor ?? Colors.grey
-                            : outlinedButtonThemeColor ?? Colors.grey,
-                    strokeAlign: BorderSide.strokeAlignOutside,
-                  );
-                },
-              ),
-            ),
-            child: child),
+                        ? borderColor ?? Colors.grey
+                        : outlinedButtonThemeColor ?? Colors.grey,
+                strokeAlign: BorderSide.strokeAlignOutside,
+              );
+            }),
+          ),
+          child: child,
+        ),
       ),
     );
   }

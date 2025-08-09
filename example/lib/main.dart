@@ -6,16 +6,13 @@ void main() {
 }
 
 class Chiclet extends StatelessWidget {
-  const Chiclet({Key? key}) : super(key: key);
+  const Chiclet({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Chiclet',
-      theme: ThemeData(
-        colorSchemeSeed: Colors.red,
-        useMaterial3: false,
-      ),
+      theme: ThemeData(colorSchemeSeed: Colors.red, useMaterial3: false),
       home: const MyHomePage(title: 'Chiclet'),
       debugShowCheckedModeBanner: false,
     );
@@ -25,7 +22,7 @@ class Chiclet extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   final String title;
 
-  const MyHomePage({required this.title, Key? key}) : super(key: key);
+  const MyHomePage({required this.title, super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -45,84 +42,96 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ChicletOutlinedAnimatedButton(
-                      onPressed: () {},
-                      height: 64,
-                      borderRadius: 0,
-                      child: const Icon(Icons.keyboard_return)),
+                    onPressed: () {},
+                    height: 64,
+                    borderRadius: 0,
+                    child: const Icon(Icons.keyboard_return),
+                  ),
                   ChicletAnimatedButton(
-                      onPressed: () {},
-                      height: 64,
-                      borderRadius: 0,
-                      child: const Icon(Icons.keyboard_return)),
+                    onPressed: () {},
+                    height: 64,
+                    borderRadius: 0,
+                    child: const Icon(Icons.keyboard_return),
+                  ),
                   ChicletAnimatedButton(
-                      onPressed: () {},
-                      height: 64,
-                      width: 140,
-                      borderRadius: 0,
-                      child: const Icon(Icons.keyboard_return)),
+                    onPressed: () {},
+                    height: 64,
+                    width: 140,
+                    borderRadius: 0,
+                    child: const Icon(Icons.keyboard_return),
+                  ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ChicletOutlinedAnimatedButton(
-                      onPressed: () {},
-                      height: 64,
-                      child: const Icon(Icons.keyboard_return_rounded)),
+                    onPressed: () {},
+                    height: 64,
+                    child: const Icon(Icons.keyboard_return_rounded),
+                  ),
                   ChicletAnimatedButton(
-                      onPressed: () {},
-                      height: 64,
-                      child: const Icon(Icons.keyboard_return_rounded)),
+                    onPressed: () {},
+                    height: 64,
+                    child: const Icon(Icons.keyboard_return_rounded),
+                  ),
                   ChicletAnimatedButton(
-                      onPressed: () {},
-                      height: 64,
-                      width: 140,
-                      child: const Icon(Icons.keyboard_return_rounded)),
+                    onPressed: () {},
+                    height: 64,
+                    width: 140,
+                    child: const Icon(Icons.keyboard_return_rounded),
+                  ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ChicletOutlinedAnimatedButton(
-                      onPressed: () {},
-                      height: 64,
-                      buttonType: ChicletButtonTypes.circle,
-                      child: const Icon(Icons.keyboard_return_rounded)),
+                    onPressed: () {},
+                    height: 64,
+                    buttonType: ChicletButtonTypes.circle,
+                    child: const Icon(Icons.keyboard_return_rounded),
+                  ),
                   ChicletAnimatedButton(
-                      onPressed: () {},
-                      height: 64,
-                      buttonType: ChicletButtonTypes.circle,
-                      child: const Icon(Icons.keyboard_return_rounded)),
+                    onPressed: () {},
+                    height: 64,
+                    buttonType: ChicletButtonTypes.circle,
+                    child: const Icon(Icons.keyboard_return_rounded),
+                  ),
                   ChicletAnimatedButton(
-                      onPressed: () {},
-                      width: 140,
-                      height: 64,
-                      borderRadius: 64,
-                      buttonType: ChicletButtonTypes.roundedRectangle,
-                      child: const Icon(Icons.keyboard_return_rounded)),
+                    onPressed: () {},
+                    width: 140,
+                    height: 64,
+                    borderRadius: 64,
+                    buttonType: ChicletButtonTypes.roundedRectangle,
+                    child: const Icon(Icons.keyboard_return_rounded),
+                  ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ChicletOutlinedAnimatedButton(
-                      onPressed: () {},
-                      height: 50,
-                      width: 65,
-                      buttonType: ChicletButtonTypes.oval,
-                      child: const Icon(Icons.keyboard_return_rounded)),
+                    onPressed: () {},
+                    height: 50,
+                    width: 65,
+                    buttonType: ChicletButtonTypes.oval,
+                    child: const Icon(Icons.keyboard_return_rounded),
+                  ),
                   ChicletAnimatedButton(
-                      onPressed: () {},
-                      height: 50,
-                      width: 65,
-                      buttonType: ChicletButtonTypes.oval,
-                      child: const Icon(Icons.keyboard_return_rounded)),
+                    onPressed: () {},
+                    height: 50,
+                    width: 65,
+                    buttonType: ChicletButtonTypes.oval,
+                    child: const Icon(Icons.keyboard_return_rounded),
+                  ),
                   ChicletAnimatedButton(
-                      onPressed: () {},
-                      height: 50,
-                      width: 140,
-                      buttonType: ChicletButtonTypes.oval,
-                      child: const Icon(Icons.keyboard_return_rounded)),
+                    onPressed: () {},
+                    height: 50,
+                    width: 140,
+                    buttonType: ChicletButtonTypes.oval,
+                    child: const Icon(Icons.keyboard_return_rounded),
+                  ),
                 ],
               ),
               ChicletSegmentedButton(

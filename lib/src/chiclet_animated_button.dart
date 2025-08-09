@@ -66,26 +66,26 @@ class ChicletAnimatedButton extends StatefulWidget {
   /// Creates the InkWell splash factory, which defines the appearance of "ink" splashes that occur in response to taps.
   final InteractiveInkFeatureFactory? splashFactory;
 
-  const ChicletAnimatedButton(
-      {Key? key,
-      this.onPressed,
-      this.padding,
-      this.width,
-      this.height = 50,
-      this.minimumSize,
-      this.maximumSize,
-      this.isPressed = false,
-      this.buttonHeight = 4,
-      this.borderRadius = 16,
-      this.buttonColor,
-      this.foregroundColor = Colors.white,
-      this.backgroundColor,
-      this.disabledForegroundColor,
-      this.disabledBackgroundColor,
-      this.splashFactory = NoSplash.splashFactory,
-      this.buttonType = ButtonTypes.roundedRectangle,
-      required this.child})
-      : super(key: key);
+  const ChicletAnimatedButton({
+    super.key,
+    this.onPressed,
+    this.padding,
+    this.width,
+    this.height = 50,
+    this.minimumSize,
+    this.maximumSize,
+    this.isPressed = false,
+    this.buttonHeight = 4,
+    this.borderRadius = 16,
+    this.buttonColor,
+    this.foregroundColor = Colors.white,
+    this.backgroundColor,
+    this.disabledForegroundColor,
+    this.disabledBackgroundColor,
+    this.splashFactory = NoSplash.splashFactory,
+    this.buttonType = ButtonTypes.roundedRectangle,
+    required this.child,
+  });
 
   @override
   State<ChicletAnimatedButton> createState() => _ChicletAnimatedButtonState();
@@ -105,23 +105,24 @@ class _ChicletAnimatedButtonState extends State<ChicletAnimatedButton>
       onTapUp: _onTapUp,
       onTapCancel: _onTapCancel,
       child: ChicletButton(
-          onPressed: !isDisabled ? _handleButtonPress : null,
-          padding: widget.padding,
-          width: widget.width,
-          height: widget.height,
-          minimumSize: widget.minimumSize,
-          maximumSize: widget.maximumSize,
-          isPressed: isDisabled ? true : _isPressed,
-          buttonHeight: widget.buttonHeight,
-          borderRadius: widget.borderRadius,
-          buttonColor: widget.buttonColor,
-          foregroundColor: widget.foregroundColor,
-          backgroundColor: widget.backgroundColor,
-          disabledForegroundColor: widget.disabledForegroundColor,
-          disabledBackgroundColor: widget.disabledBackgroundColor,
-          splashFactory: widget.splashFactory,
-          buttonType: widget.buttonType,
-          child: widget.child),
+        onPressed: !isDisabled ? _handleButtonPress : null,
+        padding: widget.padding,
+        width: widget.width,
+        height: widget.height,
+        minimumSize: widget.minimumSize,
+        maximumSize: widget.maximumSize,
+        isPressed: isDisabled ? true : _isPressed,
+        buttonHeight: widget.buttonHeight,
+        borderRadius: widget.borderRadius,
+        buttonColor: widget.buttonColor,
+        foregroundColor: widget.foregroundColor,
+        backgroundColor: widget.backgroundColor,
+        disabledForegroundColor: widget.disabledForegroundColor,
+        disabledBackgroundColor: widget.disabledBackgroundColor,
+        splashFactory: widget.splashFactory,
+        buttonType: widget.buttonType,
+        child: widget.child,
+      ),
     );
   }
 
@@ -133,6 +134,7 @@ class _ChicletAnimatedButtonState extends State<ChicletAnimatedButton>
       }
     });
     await Future.delayed(duration, () {
+      if (!mounted) return;
       setState(() {
         _isPressed = false;
       });

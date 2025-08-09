@@ -69,33 +69,32 @@ class ChicletButtonSegment<T> extends StatefulWidget {
   /// Creates the InkWell splash factory, which defines the appearance of "ink" splashes that occur in response to taps.
   late InteractiveInkFeatureFactory? _splashFactory;
 
-  ChicletButtonSegment(
-      {Key? key,
-      double? height,
-      double? buttonHeight,
-      double? borderRadius,
-      ButtonTypes? buttonType,
-      ButtonPositions? buttonPosition,
-      InteractiveInkFeatureFactory? splashFactory,
-      this.onPressed,
-      this.padding,
-      this.width,
-      this.minimumSize,
-      this.maximumSize,
-      this.isPressed = false,
-      this.buttonColor,
-      this.foregroundColor = Colors.white,
-      this.backgroundColor,
-      this.disabledForegroundColor,
-      this.disabledBackgroundColor,
-      required this.child})
-      : _height = height,
-        _buttonHeight = buttonHeight = 4,
-        _borderRadius = borderRadius = 16,
-        _buttonType = buttonType = ChicletButtonTypes.roundedRectangle,
-        _buttonPosition = buttonPosition,
-        _splashFactory = splashFactory = NoSplash.splashFactory,
-        super(key: key);
+  ChicletButtonSegment({
+    super.key,
+    double? height,
+    double? buttonHeight,
+    double? borderRadius,
+    ButtonTypes? buttonType,
+    ButtonPositions? buttonPosition,
+    InteractiveInkFeatureFactory? splashFactory,
+    this.onPressed,
+    this.padding,
+    this.width,
+    this.minimumSize,
+    this.maximumSize,
+    this.isPressed = false,
+    this.buttonColor,
+    this.foregroundColor = Colors.white,
+    this.backgroundColor,
+    this.disabledForegroundColor,
+    this.disabledBackgroundColor,
+    required this.child,
+  }) : _height = height,
+       _buttonHeight = buttonHeight = 4,
+       _borderRadius = borderRadius = 16,
+       _buttonType = buttonType = ChicletButtonTypes.roundedRectangle,
+       _buttonPosition = buttonPosition,
+       _splashFactory = splashFactory = NoSplash.splashFactory;
 
   @protected
   set height(double height) {
@@ -142,28 +141,30 @@ class _ChicletAnimatedButtonState<T> extends State<ChicletButtonSegment<T>>
     final isDisabled = widget.onPressed == null;
 
     return GestureDetector(
-        onTapDown: _onTapDown,
-        onTapUp: _onTapUp,
-        onTapCancel: _onTapCancel,
-        child: ChicletButton(
-            buttonPosition: widget._buttonPosition,
-            onPressed: !isDisabled ? _handleButtonPress : null,
-            padding: widget.padding,
-            width: widget.width,
-            height: widget._height ?? 50,
-            minimumSize: widget.minimumSize,
-            maximumSize: widget.maximumSize,
-            isPressed: isDisabled ? true : _isPressed,
-            buttonHeight: widget._buttonHeight,
-            borderRadius: widget._borderRadius,
-            buttonColor: widget.buttonColor,
-            foregroundColor: widget.foregroundColor,
-            backgroundColor: widget.backgroundColor,
-            disabledForegroundColor: widget.disabledForegroundColor,
-            disabledBackgroundColor: widget.disabledBackgroundColor,
-            splashFactory: widget._splashFactory,
-            buttonType: widget._buttonType,
-            child: widget.child));
+      onTapDown: _onTapDown,
+      onTapUp: _onTapUp,
+      onTapCancel: _onTapCancel,
+      child: ChicletButton(
+        buttonPosition: widget._buttonPosition,
+        onPressed: !isDisabled ? _handleButtonPress : null,
+        padding: widget.padding,
+        width: widget.width,
+        height: widget._height ?? 50,
+        minimumSize: widget.minimumSize,
+        maximumSize: widget.maximumSize,
+        isPressed: isDisabled ? true : _isPressed,
+        buttonHeight: widget._buttonHeight,
+        borderRadius: widget._borderRadius,
+        buttonColor: widget.buttonColor,
+        foregroundColor: widget.foregroundColor,
+        backgroundColor: widget.backgroundColor,
+        disabledForegroundColor: widget.disabledForegroundColor,
+        disabledBackgroundColor: widget.disabledBackgroundColor,
+        splashFactory: widget._splashFactory,
+        buttonType: widget._buttonType,
+        child: widget.child,
+      ),
+    );
   }
 
   Future<void> _handleButtonPress() async {
@@ -174,6 +175,7 @@ class _ChicletAnimatedButtonState<T> extends State<ChicletButtonSegment<T>>
       }
     });
     await Future.delayed(duration, () {
+      if (!mounted) return;
       setState(() {
         _isPressed = false;
       });

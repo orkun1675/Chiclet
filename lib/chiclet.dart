@@ -1,5 +1,3 @@
-library chiclet;
-
 export 'src/enums/button_types.dart' show ChicletButtonTypes;
 export 'src/chiclet_outlined_button.dart' show ChicletOutlinedButton;
 export 'src/chiclet_button.dart' show ChicletButton;
